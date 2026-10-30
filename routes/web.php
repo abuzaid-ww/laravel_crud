@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
@@ -39,3 +40,7 @@ Route::post('/create-post', [PostController::class, 'createPost']);
 Route::get('/edit-post/{post}',  [PostController::class, 'showEditScreen']);
 Route::put('/edit-post/{post}',  [PostController::class, 'actuallyUpdatePost']);
 Route::delete('/delete-post/{post}',  [PostController::class, 'deletePost']);
+Route::get('all-posts',[PostController::class, 'allPost'])->name('all-post');
+
+// products related
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');

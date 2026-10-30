@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function allPost(Post $post)
+    {
+        // $post = Post::all();
+        $post = Post::latest()->get();
+        return view('all-post', ['posts' => $post]);
+    }
 
     public function deletePost(Post $post, Request $request)
     {
@@ -57,6 +63,6 @@ class PostController extends Controller
 
         Post::create($incomingFields);
 
-        return redirect('/');
+        return redirect(route('all-post'));
     }
 }
