@@ -98,6 +98,22 @@
                     @endforeach
                 </div>
 
+                <h3>hehehehe</h3>
+                @push('scripts')
+                    <script src="https://cdn.tiny.cloud/1/ebd44ymar2ny13halx7m4bqhyu1jet7aztfk2f095dtldvzr/tinymce/8/tinymce.min.js"
+                        referrerpolicy="origin" crossorigin="anonymous"></script>
+
+                    <script>
+                        tinymce.init({
+                            selector: '#postBody',
+                            height: 400,
+                            plugins: 'lists link image table code',
+                            toolbar: 'undo redo | blocks | bold italic underline | bullist numlist | link image | table | code'
+                        });
+                    </script>
+                @endpush
+                <h3>end Hehehhe ------------</h3>
+
                 @if (count($posts) === 0)
                     <div class="text-center py-5">
                         <h5 class="text-muted">No posts yet</h5>
