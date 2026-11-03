@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Mews\Purifier\Facades\Purifier;
 
 class PostController extends Controller
 {
@@ -53,12 +54,19 @@ class PostController extends Controller
     public function createPost(Request $request)
     {
         $incomingFields = $request->validate([
-            'title' => 'required',
-            'body' => 'required'
+            'title' => 'required|string',
+            'body' => 'required|string',
         ]);
 
         $incomingFields['title'] = strip_tags($incomingFields['title']);
-        $incomingFields['body'] = strip_tags($incomingFields['body']);
+
+        $incomingFields['body'] = Purifier::clean(
+            $incomingFields['body'],
+            [
+                'HTML.Allowed' => 'h1,h2,h3,h4,h5,h6,p,br,strong,b,i,em,u,ul,ol,li,a[href|title],div,span',
+            ]
+        );
+
         $incomingFields['user_id'] = auth()->id();
 
         Post::create($incomingFields);

@@ -43,7 +43,7 @@
                                 </h5>
 
                                 <p class="card-text text-secondary mb-4" style="white-space: pre-line;">
-                                    {{ $post['body'] }}
+                                    {!! $post['body'] !!}
                                 </p>
 
                                 <div class="mt-auto pt-3 border-top">

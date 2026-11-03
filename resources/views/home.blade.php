@@ -21,7 +21,7 @@
 
                             <div class="mb-3">
                                 <label for="postBody" class="form-label">Post body</label>
-                                <textarea name="body" id="postBody" class="form-control" rows="5" placeholder="Write your post" required></textarea>
+                                <textarea name="body" id="postBody" class="form-control" rows="5" placeholder="Write your post"></textarea>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Save Post</button>
@@ -65,9 +65,9 @@
                                         {{ $post['title'] }}
                                     </h5>
 
-                                    <p class="card-text text-secondary mb-4" style="white-space: pre-line;">
-                                        {{ $post['body'] }}
-                                    </p>
+                                    <div class="card-text text-secondary mb-4" style="white-space: pre-line;">
+                                        {!! $post['body'] !!}
+                                    </div>
 
                                     <div class="mt-auto pt-3 border-top">
                                         <span class="text-muted small">
@@ -98,7 +98,6 @@
                     @endforeach
                 </div>
 
-                <h3>hehehehe</h3>
                 @push('scripts')
                     <script src="https://cdn.tiny.cloud/1/ebd44ymar2ny13halx7m4bqhyu1jet7aztfk2f095dtldvzr/tinymce/8/tinymce.min.js"
                         referrerpolicy="origin" crossorigin="anonymous"></script>
@@ -112,8 +111,7 @@
                         });
                     </script>
                 @endpush
-                <h3>end Hehehhe ------------</h3>
-
+                
                 @if (count($posts) === 0)
                     <div class="text-center py-5">
                         <h5 class="text-muted">No posts yet</h5>
