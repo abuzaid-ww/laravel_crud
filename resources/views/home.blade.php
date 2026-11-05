@@ -92,6 +92,10 @@
                                         </form>
                                     </div>
 
+                                    <a href="{{ route('post.show', $post->slug ?? $post->id) }}"
+                                        class="btn btn-primary btn-sm rounded-pill px-4 py-2 shadow-sm mt-3">
+                                        Read More <i class="ms-1">→</i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +115,7 @@
                         });
                     </script>
                 @endpush
-                
+
                 @if (count($posts) === 0)
                     <div class="text-center py-5">
                         <h5 class="text-muted">No posts yet</h5>

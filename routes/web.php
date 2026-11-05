@@ -41,6 +41,8 @@ Route::get('/edit-post/{post}',  [PostController::class, 'showEditScreen']);
 Route::put('/edit-post/{post}',  [PostController::class, 'actuallyUpdatePost']);
 Route::delete('/delete-post/{post}',  [PostController::class, 'deletePost']);
 Route::get('all-posts',[PostController::class, 'allPost'])->name('all-post');
+// Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
+Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.show');
 
 // products related
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');

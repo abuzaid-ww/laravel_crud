@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Mews\Purifier\Facades\Purifier;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
     public function allPost(Post $post)
     {
-        // $post = Post::all();
         $post = Post::latest()->get();
         return view('all-post', ['posts' => $post]);
     }
@@ -38,6 +38,18 @@ class PostController extends Controller
         $incomingFields['title'] = strip_tags($incomingFields['title']);
         $incomingFields['body'] = strip_tags($incomingFields['body']);
 
+        // Generate unique slug for updates (excluding current post ID)
+        $slug = Str::slug($incomingFields['title']);
+        $originalSlug = $slug;
+        $count = 1;
+
+        while (Post::where('slug', $slug)->where('id', '!=', $post->id)->exists()) {
+            $slug = "{$originalSlug}-{$count}";
+            $count++;
+        }
+
+        $incomingFields['slug'] = $slug;
+
         $post->update($incomingFields);
 
         return redirect('/');
@@ -60,6 +72,18 @@ class PostController extends Controller
 
         $incomingFields['title'] = strip_tags($incomingFields['title']);
 
+        // Generate unique slug for new posts
+        $slug = Str::slug($incomingFields['title']);
+        $originalSlug = $slug;
+        $count = 1;
+
+        while (Post::where('slug', $slug)->exists()) {
+            $slug = "{$originalSlug}-{$count}";
+            $count++;
+        }
+
+        $incomingFields['slug'] = $slug;
+
         $incomingFields['body'] = Purifier::clean(
             $incomingFields['body'],
             [
@@ -72,5 +96,10 @@ class PostController extends Controller
         Post::create($incomingFields);
 
         return redirect(route('all-post'));
+    }
+
+    public function show(Post $post)
+    {
+        return view('single-post', compact('post'));
     }
 }

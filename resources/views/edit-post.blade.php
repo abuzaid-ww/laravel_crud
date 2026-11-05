@@ -17,7 +17,7 @@
 
                         <div class="mb-3">
                             <label for="postBody" class="form-label">Post body</label>
-                            <textarea name="body" id="postBody" class="form-control" rows="5" placeholder="Write your post" required>{{ $post->body }}</textarea>
+                            <textarea name="body" id="postBody" class="form-control" rows="5" placeholder="Write your post">{{ $post->body }}</textarea>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Update Post</button>
@@ -27,5 +27,19 @@
             </div>
 
         </div>
+
+        @push('scripts')
+            <script src="https://cdn.tiny.cloud/1/ebd44ymar2ny13halx7m4bqhyu1jet7aztfk2f095dtldvzr/tinymce/8/tinymce.min.js"
+                referrerpolicy="origin" crossorigin="anonymous"></script>
+
+            <script>
+                tinymce.init({
+                    selector: '#postBody',
+                    height: 400,
+                    plugins: 'lists link image table code',
+                    toolbar: 'undo redo | blocks | bold italic underline | bullist numlist | link image | table | code'
+                });
+            </script>
+        @endpush
     </section>
 @endsection
