@@ -42,7 +42,7 @@
 
                 <div class="row g-4">
                     @foreach ($posts as $post)
-                        <div class="col-12 col-md-6 col-lg-4">
+                        <div class="col-12 col-md-6 col-lg-4" id="post-container-{{ $post->id }}">
                             <div class="card h-100 border-0 shadow-sm rounded-4">
                                 <div class="card-body p-4 d-flex flex-column">
 
@@ -81,7 +81,7 @@
                                             <i class="me-1">✎</i> Edit Post
                                         </a>
 
-                                        <form action="/delete-post/{{ $post->id }}" method="POST"
+                                        {{-- <form action="/delete-post/{{ $post->id }}" method="POST"
                                             onsubmit="return confirm('Are you sure you want to delete this post?')">
                                             @csrf
                                             @method('DELETE')
@@ -89,7 +89,12 @@
                                             <button type="submit" class="btn btn-outline-danger btn-sm rounded-pill px-4">
                                                 <i class="me-1">🗑</i> Delete
                                             </button>
-                                        </form>
+                                        </form> --}}
+                                        <button type="button" onclick="deletePost({{ $post->id }})"
+                                            class="btn btn-outline-danger btn-sm rounded-pill px-4"
+                                            id="delete-btn-{{ $post->id }}">
+                                            <i class="me-1">🗑</i> Delete
+                                        </button>
                                     </div>
 
                                     <a href="{{ route('post.show', $post->slug ?? $post->id) }}"

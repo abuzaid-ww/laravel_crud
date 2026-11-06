@@ -17,12 +17,28 @@ class PostController extends Controller
 
     public function deletePost(Post $post, Request $request)
     {
-        if (auth()->user()->id === $post['user_id']) {
+        // Check if user owns the post
+        if (auth()->check() && auth()->user()->id === $post->user_id) {
             $post->delete();
+
+            // If the request came from JavaScript/AJAX, return JSON success
+            if ($request->wantsJson()) {
+                return response()->json(['message' => 'Post deleted successfully']);
+            }
         }
 
+        // Fallback for regular requests
         return redirect('/');
     }
+
+    // public function deletePost(Post $post, Request $request)
+    // {
+    //     if (auth()->user()->id === $post['user_id']) {
+    //         $post->delete();
+    //     }
+
+    //     return redirect('/');
+    // }
 
     public function actuallyUpdatePost(Post $post, Request $request)
     {
