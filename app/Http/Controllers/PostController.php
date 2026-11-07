@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Mews\Purifier\Facades\Purifier;
 use Illuminate\Support\Str;
 
-class PostController extends Controller
+
+                        class PostController extends Controller
 {
     public function allPost(Post $post)
     {
