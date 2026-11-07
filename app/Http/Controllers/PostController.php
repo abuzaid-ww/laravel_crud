@@ -8,7 +8,7 @@ use Mews\Purifier\Facades\Purifier;
 use Illuminate\Support\Str;
 
 
-                        class PostController extends Controller
+class PostController extends Controller
 {
     public function allPost(Post $post)
     {
@@ -31,15 +31,6 @@ use Illuminate\Support\Str;
         // Fallback for regular requests
         return redirect('/');
     }
-
-    // public function deletePost(Post $post, Request $request)
-    // {
-    //     if (auth()->user()->id === $post['user_id']) {
-    //         $post->delete();
-    //     }
-
-    //     return redirect('/');
-    // }
 
     public function actuallyUpdatePost(Post $post, Request $request)
     {
