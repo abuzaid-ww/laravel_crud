@@ -21,7 +21,7 @@
                 {{ $post['title'] }}
             </h5>
 
-            <div class="card-text text-secondary mb-4" style="white-space: pre-line;">
+            <div class="card-text mb-4">
                 {!! $post['body'] !!}
             </div>
 

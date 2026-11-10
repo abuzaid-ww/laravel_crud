@@ -44,7 +44,9 @@ class PostController extends Controller
         ]);
 
         $incomingFields['title'] = strip_tags($incomingFields['title']);
-        $incomingFields['body'] = strip_tags($incomingFields['body']);
+        $incomingFields['body'] = Purifier::clean($incomingFields['body'], [
+            'HTML.Allowed' => 'h1,h2,h3,h4,h5,h6,p,br,strong,b,i,em,u,ul,ol,li,a[href|title],div,span',
+        ]);
 
         // Generate unique slug for updates (excluding current post ID)
         $slug = Str::slug($incomingFields['title']);
